@@ -1,0 +1,25 @@
+
+#include <Servo.h> // подключаем библиотеку для работы с сервоприводом
+Servo servo; // объявляем переменную servo типа "servo"
+int led_pin=3;          // пин подключения
+int button_pin = 4;     // пин кнопки
+// переменные
+int buttonState = 1;          // переменная для хранения состояния кнопки
+void setup() {
+    pinMode(led_pin, OUTPUT); // Инициализируем цифровой вход/выход в режиме выхода.
+    pinMode(button_pin, INPUT); // Инициализируем цифровой вход/выход в режиме входа.
+    servo.attach(5); // привязываем сервопривод к аналоговому выходу 10
+}
+void loop() {
+  buttonState = digitalRead(button_pin);// считываем значения с входа кнопки
+   if (buttonState == HIGH) {
+    digitalWrite(led_pin, HIGH);// зажигаем светодиод
+    servo.write(0); //ставим вал на 180
+    delay (1000); // задержка в 1 секунду
+  }
+  else {
+    digitalWrite(led_pin, LOW);// выключаем светодиод
+    servo.write(175); //ставим вал на 0
+    delay (1000); // задержка в 1 секунду
+  }
+}
